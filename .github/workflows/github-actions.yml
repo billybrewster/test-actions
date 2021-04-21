@@ -23,7 +23,11 @@ jobs:
       - run: bundle exec middleman build
       - run: git config --global user.email "rob@example.com"
       - run: git config --global user.name "rob"
-      - run: bundle exec middleman deploy
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.PAGES }}
+          publish_dir: ./build
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
