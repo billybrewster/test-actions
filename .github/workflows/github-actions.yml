@@ -19,7 +19,7 @@ jobs:
       - run: sudo apt install mlocate
       - run: sudo updatedb
       - run: locate rvm | grep bin
-      - run: rvm install ruby-2.6.1
+      - run: /home/runner/.rvm/bin/rvm install ruby-2.6.1
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
