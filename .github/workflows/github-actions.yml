@@ -1,29 +1,20 @@
-name: GitHub Actions Demo
+name: Build and Deploy
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - run: gpg2 --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-      - run: \curl -sSL https://rvm.io/mpapis.asc | sudo gpg --import -
-      - run: \curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg --import -
-      - run: \curl -sSL https://get.rvm.io | bash -s stable --ruby
-      - run: source /home/runner/.rvm/scripts/rvm
-      - run: /home/runner/.rvm/bin/rvm install ruby-2.6.1
-      - run: sudo gem install middleman
-      - run: sudo gem install bundler:1.17.3
-      - run: bundle install
-      - run: bundle exec middleman build  
-      - run: bundle exec middleman deploy
-      - name: List files in the repository
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          npm install
+          npm run build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: build # The folder the action should deploy.
 
