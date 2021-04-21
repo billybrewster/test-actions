@@ -16,10 +16,10 @@ jobs:
       - run: \curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg --import -
       - run: \curl -sSL https://get.rvm.io | bash -s stable --ruby
       - run: source /home/runner/.rvm/scripts/rvm
-      - run: sudo apt install mlocate
-      - run: sudo updatedb
-      - run: locate rvm | grep bin
       - run: /home/runner/.rvm/bin/rvm install ruby-2.6.1
+      - run: gem install middleman
+      - run: bundle install
+      - run: bundle exec middleman build  
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
