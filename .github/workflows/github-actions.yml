@@ -15,7 +15,7 @@ jobs:
       - run: \curl -sSL https://rvm.io/mpapis.asc | sudo gpg --import -
       - run: \curl -sSL https://rvm.io/pkuczynski.asc | sudo gpg --import -
       - run: \curl -sSL https://get.rvm.io | bash -s stable --ruby
-      - run: /usr/local/rvm/src/rvm/bin/rvm install ruby-2.6.1
+      - run: rvm install ruby-2.6.1
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
