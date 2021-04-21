@@ -20,6 +20,7 @@ jobs:
       - run: sudo gem install middleman
       - run: bundle install
       - run: bundle exec middleman build  
+      - run: bundle exec middleman deploy
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
